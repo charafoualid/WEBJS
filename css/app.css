@@ -1,11 +1,12 @@
 * {
   box-sizing: border-box;
-  font-family: arial;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 
 body {
   background-color: #f1f1f1;
 }
+
 
 /* .form-control{
     width: 137%;
