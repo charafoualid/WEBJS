@@ -4,12 +4,12 @@
 // - 3 maak een methode die ze tekent op de DOM
 // - Zoek een fix om de data te handelen
 
-class Form {
+export class Form {
     rootElement;
     stepCounter = 0;
     steps = [{
             stepName: "Stap 1",
-            fields: [{ label: "Length", name: "length", type: "text", required: true }, { label: "Width", name: "width", type: "text", required: true }]
+            fields: [{ label: "Length", name: "length", type: "text", required: "true" }, { label: "Width", name: "width", type: "text", required: "true" }]
         },
         {
             stepName: "Stap 2",
@@ -17,7 +17,7 @@ class Form {
                 label: "Interval (in seconds)",
                 name: "interval",
                 type: "number",
-                required: true
+                required: "true"
             }]
         },
         {
@@ -26,16 +26,15 @@ class Form {
                 label: "Type",
                 name: "type",
                 type: "select",
-                options: [
-                    { name: "Cold Transport" },
-                    { name: "Breakable Transport" },
-                    { name: "General Transport" },
-                    { name: "Pallet Transport" }
-                ],
-                required: true
+                options: ["Cold Transport", "Breakable Transport", "General Transport", "Pallet Transport"],
+
+                required: "true"
             }]
         }
     ];
+
+    formData = {};
+    nextStepCallback = null;
 
     constructor(rootElement, stepCounter) {
         this.rootElement = rootElement;
@@ -46,6 +45,7 @@ class Form {
         //variables
         this.rootElement.innerHTML = '';
         let formElement = document.createElement('form');
+        let step = this.steps[stepCounter];
 
         //title
         let stepNameElement = document.createElement('h2');
@@ -59,7 +59,7 @@ class Form {
         for (let i = 0; i < nrOfBullets; i++) {
             let bulletElement = document.createElement('div');
             bulletElement.classList.add('bullet');
-            if (i <= stepNr) {
+            if (i <= stepCounter) {
                 bulletElement.classList.add('active');
             }
             stepBulletsElement.appendChild(bulletElement);
@@ -77,8 +77,9 @@ class Form {
             inputElement.setAttribute('name', field.name);
             inputElement.setAttribute('required', field.required);
             formElement.appendChild(labelElement);
-            formElement.appendChild(labelElement);
+            formElement.appendChild(inputElement);
         });
+
         let lastStep = stepCounter >= this.steps.length - 1;
         let buttonElement = document.createElement('button');
 
@@ -91,22 +92,21 @@ class Form {
         });
         this.rootElement.appendChild(formElement);
     }
-    nextStep(form) {
-        //call step 2
-        let formdata = new FormData(form);
-        const data = Object.fromEntries(formdata.entries());
-        this.truckdata = {...this.truckdata, ...data };
+    nextStep(form, callback) {
+        this.nextStepCallback = callback;
 
-        this.stepCounter++;
-
-        if (this.stepCounter >= this.steps.length) {
-            //last step
-            this.callback(this.truckdata);
-            this.stepCounter = 0;
-            this.drawForm(this.stepCounter);
-        } else {
-            this.drawStep
+        let formData = new FormData(form);
+        for (let [name, value] of formData.entries()) {
+            this.formData[name] = value;
         }
+
+        if (typeof this.nextStepCallback === "function") {
+            this.nextStepCallback(this.formData);
+        }
+
+        this.drawForm(this.stepCounter);
     }
+
+
 
 }
