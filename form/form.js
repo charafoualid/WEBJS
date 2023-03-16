@@ -7,6 +7,7 @@
 export class Form {
     rootElement;
     stepCounter = 0;
+    nextStepCallback;
     steps = [{
             stepName: "Stap 1",
             fields: [{ label: "Length", name: "length", type: "text", required: "true" }, { label: "Width", name: "width", type: "text", required: "true" }]
@@ -92,20 +93,17 @@ export class Form {
         });
         this.rootElement.appendChild(formElement);
     }
-    nextStep(form, callback) {
-        this.nextStepCallback = callback;
-
+    nextStep(form) {
+        console.log(form.value);
         let formData = new FormData(form);
         for (let [name, value] of formData.entries()) {
             this.formData[name] = value;
         }
 
-        if (typeof this.nextStepCallback === "function") {
-            this.nextStepCallback(this.formData);
-        }
-
+        this.stepCounter++;
         this.drawForm(this.stepCounter);
     }
+
 
 
 

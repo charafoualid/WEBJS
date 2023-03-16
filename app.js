@@ -1,9 +1,14 @@
 import { Form } from './form/form.js';
 
 const rootElement = document.querySelector('.form-container');
+const stepCounter = 0;
 const form = new Form(rootElement, stepCounter);
-form.drawForm(0);
 
-form.nextStepCallback = function(formData) {
-    console.log(formData);
-}
+document.addEventListener("DOMContentLoaded", () => {
+    console.log('ewa')
+    form.drawForm(stepCounter);
+
+    form.nextStepCallback = function(formData) {
+        console.log(formData);
+    }
+});
