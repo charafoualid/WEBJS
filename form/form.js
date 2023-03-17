@@ -9,11 +9,11 @@ export class Form {
     stepCounter = 0;
     nextStepCallback;
     steps = [{
-            stepName: "Stap 1",
+            stepName: "Step 1",
             fields: [{ label: "Length", name: "length", type: "text", required: "true" }, { label: "Width", name: "width", type: "text", required: "true" }]
         },
         {
-            stepName: "Stap 2",
+            stepName: "Step 2",
             fields: [{
                 label: "Interval (in seconds)",
                 name: "interval",
@@ -22,7 +22,7 @@ export class Form {
             }]
         },
         {
-            stepName: "Stap 3",
+            stepName: "Step 3",
             fields: [{
                 label: "Type",
                 name: "type",
@@ -36,12 +36,13 @@ export class Form {
 
     formData = {};
     nextStepCallback = null;
-
+    //constructor
     constructor(rootElement, stepCounter) {
         this.rootElement = rootElement;
         this.stepCounter = stepCounter;
     }
 
+    //method that draws the form on the DOM
     drawForm(stepCounter) {
         //variables
         this.rootElement.innerHTML = '';
@@ -67,7 +68,6 @@ export class Form {
         }
         formElement.appendChild(stepBulletsElement);
 
-
         //create inputfield
         step.fields.forEach(field => {
             let labelElement = document.createElement('label');
@@ -81,6 +81,11 @@ export class Form {
             formElement.appendChild(inputElement);
         });
 
+        // create select field with options if step is Step 3
+        if (stepCounter === 2) {
+            this.createOptionsList(formElement, step);
+        }
+
         let lastStep = stepCounter >= this.steps.length - 1;
         let buttonElement = document.createElement('button');
 
@@ -91,10 +96,12 @@ export class Form {
             e.preventDefault();
             this.nextStep(e.target);
         });
+
         this.rootElement.appendChild(formElement);
     }
+
+    //method that that goes to the next step
     nextStep(form) {
-        console.log(form.value);
         let formData = new FormData(form);
         for (let [name, value] of formData.entries()) {
             this.formData[name] = value;
@@ -104,7 +111,37 @@ export class Form {
         this.drawForm(this.stepCounter);
     }
 
+    //method that makes a list of options for step 3
+    createOptionsList(formElement, step) {
+        step.fields.forEach(field => {
+            if (field.type === "select") {
+                let labelElement = document.createElement('label');
+                labelElement.innerText = field.label;
 
+                let selectElement = document.createElement('select');
+                selectElement.setAttribute('name', field.name);
+                selectElement.setAttribute('required', field.required);
 
+                field.options.forEach(option => {
+                    let optionElement = document.createElement('option');
+                    optionElement.value = option;
+                    optionElement.text = option;
+                    selectElement.appendChild(optionElement);
+                });
 
+                formElement.appendChild(labelElement);
+                formElement.appendChild(selectElement);
+            } else {
+                let labelElement = document.createElement('label');
+                labelElement.innerText = field.label;
+
+                let inputElement = document.createElement('input');
+                inputElement.setAttribute('type', field.type);
+                inputElement.setAttribute('name', field.name);
+                inputElement.setAttribute('required', field.required);
+                formElement.appendChild(labelElement);
+                formElement.appendChild(inputElement);
+            }
+        });
+    }
 }
