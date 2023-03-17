@@ -82,9 +82,10 @@ export class Form {
         });
 
         // create select field with options if step is Step 3
-        if (stepCounter === 2) {
-            this.createOptionsList(formElement, step);
+        if (stepCounter == 2) {
+            this.createOptionsList(step, formElement);
         }
+
 
         let lastStep = stepCounter >= this.steps.length - 1;
         let buttonElement = document.createElement('button');
@@ -112,7 +113,9 @@ export class Form {
     }
 
     //method that makes a list of options for step 3
-    createOptionsList(formElement, step) {
+    //method that makes a list of options for step 3
+    createOptionsList(step, formElement) {
+        //create select field
         step.fields.forEach(field => {
             if (field.type === "select") {
                 let labelElement = document.createElement('label');
@@ -144,4 +147,5 @@ export class Form {
             }
         });
     }
+
 }
