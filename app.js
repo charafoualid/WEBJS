@@ -5,7 +5,6 @@ const stepCounter = 0;
 const form = new Form(rootElement, stepCounter);
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log('ewa')
     form.drawForm(stepCounter);
 
     form.nextStepCallback = function(formData) {
