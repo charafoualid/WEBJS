@@ -141,19 +141,19 @@ export class TruckBuilder{
 
     nextStep(form){
 
+        let formdata = new FormData(form);
+        const data = Object.fromEntries(formdata.entries());
+        this.truckdata = {...this.truckdata, ...data};
+        console.log(this.truckdata)
         this.stepcounter++;
 
         if(this.stepcounter >= this.steps.length){
-            
-            const inputl = document.querySelector('input[name="lengte"]');
-            const lengte = inputl.value;
 
-            const inputb = document.querySelector('input[name="breedte"]');
-            const breedte = inputb.value;
-
+            console.log(form);
+        
             this.stepcounter = 0;
             this.drawStep(this.stepcounter);
-            this.addGrid(lengte, breedte);
+            this.addGrid(this.truckdata.lengte, this.truckdata.breedte);
 
         } else {
             this.drawStep(this.stepcounter);
