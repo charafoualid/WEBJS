@@ -141,9 +141,13 @@ export class TruckBuilder{
 
     nextStep(form){
 
+        //constructie/manier om van een element de data op te slaan
         let formdata = new FormData(form);
+        //een one-liner om te loopen door alle data
         const data = Object.fromEntries(formdata.entries());
+        //merge de data in een line na elke stap
         this.truckdata = {...this.truckdata, ...data};
+        
         console.log(this.truckdata)
         this.stepcounter++;
 
