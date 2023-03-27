@@ -1,5 +1,5 @@
-import { TruckBuilder } from './truckbuilder.js';
-import { LoadingHall } from './loadingHall.js';
+import { TruckBuilder } from '../Form/truckbuilder.js';
+import { LoadingHall } from '../Hall/loadingHall.js';
 
 
 let truckBuilderEl = document.getElementById('truckbuilder');
