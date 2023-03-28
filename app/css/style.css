@@ -36,6 +36,10 @@
     margin-top: 150px;
 }
 
+.assemblyLineContainer .tetromino {
+    animation: move-stone 5s linear;
+}
+
 #grid {
     margin-top: 150px;
     margin-right: 300px;
@@ -46,8 +50,7 @@
 
 #truckbuilder {
     margin: 5%;
-    /* width: 25%; */
-    /* border:1px solid black; */
+    max-height: 250px;
     border-radius: 10px;
     padding: 20px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
@@ -123,11 +126,11 @@ table td {
     text-align: center;
 }
 
-@keyframes run {
-    0% {
+@keyframes move-stone {
+    from {
         transform: translateX(0);
     }
-    100% {
+    to {
         transform: translateX(100%);
     }
 }
