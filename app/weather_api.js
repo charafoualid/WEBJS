@@ -16,7 +16,7 @@ function renderWeather(weather){
     var wind = document.createElement("p");
     wind.textContent = "Wind: " + weather.wind.speed + " mph, " + weather.wind.deg + "°";
     resultsContainer.append(wind);
-
+    
     var weatherDetails = weather.weather[0];
     if(weatherDetails && weatherDetails.description){
         var description = document.createElement("p");
