@@ -1,9 +1,16 @@
+// var inputField;
+
 function renderWeather(weather){
     console.log(weather);
     var resultsContainer = document.querySelector("#weather-results");
     var city = document.createElement("h2");
     city.textContent = weather.name;
     resultsContainer.append(city);
+
+    var inputField = document.createElement("input");
+    inputField.placeholder = "city/location";
+    inputField.id = "myInputField";
+    resultsContainer.append(inputField);
 
     var temp = document.createElement("p");
     temp.textContent = "Temp: " + weather.main.temp + " F";
@@ -29,11 +36,19 @@ function renderWeather(weather){
 
 //Fetch weather data for city
 function fetchWeather(query){
-    var url = "https://api.openweathermap.org/data/2.5/weather?q=Tilburg&units=imperial&appid=2158b761cc7aecf9f34cade3f4fe213e";
+
+    let input = document.getElementById("myInputField");
+    let city = input.value;
+    console.log(city);
+
+    // var url = "https://api.openweathermap.org/data/2.5/weather?q=Tilburg&units=imperial&appid=2158b761cc7aecf9f34cade3f4fe213e";
+    var url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=2158b761cc7aecf9f34cade3f4fe213e";
 
     fetch(url)
      .then((response) => response.json())
      .then((data) => renderWeather(data));
 }
 
-fetchWeather();
+inputField.addEventListener("change", function() {
+    fetchWeather();
+});
