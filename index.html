@@ -7,27 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="app/app.js" type="module" defer></script>
-    <script src="weather-api/weather_api.js" defer></script>
     <link rel="stylesheet" type="text/css" href="app/css/style.css">
 </head>
+
 <body>
     <h1>Weather</h1>
     <div id="weather-input">
-    <input type="text" id="myText">
-    <button onclick="fetchWeather()">run</button>
-    <div id="weather-results">
-
-    </div> 
+        <input type="text" id="myText">
+        <button id="run">run</button>
+        <div id="weather-results"></div>
         <div class="loadingHall">
             <div class="button-container">
                 <button id="switchHall">switchHall</button>
                 <button id="add-assembly">add-assembly</button>
             </div>
-            <div id="truckbuilder">
-            </div>
+            <div id="truckbuilder"></div>
         </div>
-        <div id="grid">
-        </div>
+        <div id="grid"></div>
     </div>
 </body>
+
 </html>
