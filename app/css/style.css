@@ -1,0 +1,148 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.assembly {
+    display: flex;
+    background-color: bisque;
+    border: 5px solid black;
+    padding: 10px;
+    margin: 75px;
+    height: 80px;
+    width: 750px;
+    align-items: center;
+}
+
+@keyframes move-stone {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(calc(750px - 40px));
+    }
+}
+
+.tetromino {
+    height: 50;
+    width: 100;
+    margin-left: 10px;
+    transform: scale(0.1);
+    background-size: contain;
+    animation-name: move-stone;
+    animation-duration: 8s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    position: fixed;
+}
+
+.assemblyLineContainer .tetromino {
+    animation-delay: 0s;
+}
+
+.loadingHall {
+    display: flex;
+}
+
+.assemblyContainer {
+    width: 500px;
+    margin-left: 100px;
+    margin-top: 150px;
+}
+
+.assemblyLineContainer .tetromino {
+    animation: move-stone 5s linear;
+}
+
+#grid {
+    margin-top: 150px;
+    margin-right: 300px;
+    height: 100%;
+    transform: scale(1.3);
+    width: 0;
+}
+
+#truckbuilder {
+    margin: 5%;
+    max-height: 250px;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+#truckbuilder form {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#truckbuilder form .step-bullets {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+#truckbuilder form .bullet {
+    border: 1px solid #2e2e2e;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    margin: 5px;
+}
+
+#truckbuilder form .bullet.active {
+    background-color: rgb(121, 123, 133);
+}
+
+#truckbuilder form h2 {
+    margin: 0px;
+}
+
+#truckbuilder form label {
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+#truckbuilder form button {
+    margin: 5px;
+    width: 200px;
+    height: 33px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+#truckbuilder form input {
+    width: 190px;
+    height: 25px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 500px;
+    margin: 50px;
+    background-color: cornflowerblue;
+    transform: scale(1.3);
+    overflow-x: auto;
+}
+
+table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}

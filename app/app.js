@@ -1,10 +1,12 @@
-import { Grid } from './grid.js';
-import {TruckBuilder} from './truckbuilder.js';
+import { TruckBuilder } from '../Form/truckbuilder.js';
+import { LoadingHall } from '../Hall/loadingHall.js';
+
 
 let truckBuilderEl = document.getElementById('truckbuilder');
 let gridEl = document.getElementById('grid');
 let truckbuilder = new TruckBuilder(truckBuilderEl, gridEl);
 
-// let gridEl = document.getElementById('grid');
-// let grid = new Grid(gridEl);
-
+let addAssemblyButton = document.getElementById('add-assembly');
+let switchButton = document.getElementById('switchHall');
+let loadingHallEl = document.querySelector('.loadingHall');
+let loadingHall = new LoadingHall(addAssemblyButton, switchButton, loadingHallEl);
