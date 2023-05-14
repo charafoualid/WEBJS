@@ -20,10 +20,31 @@
     align-items: center;
 }
 
+@keyframes move-stone {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(calc(750px - 40px));
+    }
+}
+
 .tetromino {
-    width: 40px;
-    height: 40px;
+    height: 50;
+    width: 100;
+    margin-left: 10px;
+    transform: scale(0.1);
     background-size: contain;
+    animation-name: move-stone;
+    animation-duration: 8s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    position: fixed;
+}
+
+.assemblyLineContainer .tetromino {
+    animation-delay: 0s;
 }
 
 .loadingHall {
@@ -124,13 +145,4 @@ table td {
     padding: 10px;
     border: 1px solid #ccc;
     text-align: center;
-}
-
-@keyframes move-stone {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(100%);
-    }
 }
