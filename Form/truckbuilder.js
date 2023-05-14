@@ -32,9 +32,9 @@ export class TruckBuilder {
             {
                 stepName: "Stap 3",
                 fields: [{
-                    name: 'aankomst',
+                    name: 'interval',
                     type: 'number',
-                    label: 'Aankomst',
+                    label: 'Interval',
                     required: true
                 }]
 
@@ -147,6 +147,15 @@ export class TruckBuilder {
         this.gridEl.appendChild(table);
     }
 
+    removeTruck() {
+        let table = document.querySelector('table');
+        if (table) {
+            this.gridEl.removeChild(table);
+        }
+    }
+
+
+
     checkGridSize(width, height) {
         let Trucklength = height;
         let Truckwidth = width;
@@ -154,6 +163,7 @@ export class TruckBuilder {
         if ((Trucklength < 5 || Trucklength > 10) || (Truckwidth < 5 || Truckwidth > 10)) {
             throw new Error("Lengte en breedte moet tussen de 5 & 10 zijn!");
         }
+
     }
 
     CreateErrorMessage(string) {
@@ -185,6 +195,10 @@ export class TruckBuilder {
 
         try {
             this.checkGridSize(this.truckdata.breedte, this.truckdata.lengte);
+            this.interval = parseInt(this.truckdata.interval);
+            setTimeout(() => {
+                this.removeTruck();
+            }, this.interval * 1000);
         } catch (error) {
             form.appendChild(this.CreateErrorMessage("Lengte en breedte moet tussen de 5 & 10 zijn!"));
             return;
